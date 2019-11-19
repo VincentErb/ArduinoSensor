@@ -7,9 +7,17 @@ SoftwareSerial mySerial(10, 11); // RX, TX
 //giving the software serial as port to use
 rn2xx3 myLora(mySerial);
 
+
+void onGazTooHigh(){
+  Serial.println("hey");  
+}
+
 // the setup routine runs once when you press reset:
 void setup()
 {
+  pinMode(2, INPUT);
+  attachInterrupt(digitalPinToInterrupt(2),onGazTooHigh,RISING); 
+  
   //output LED pin
   pinMode(13, OUTPUT);
   led_on();
